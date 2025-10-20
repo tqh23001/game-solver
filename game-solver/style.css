@@ -1,0 +1,328 @@
+:root {
+    color-scheme: light dark;
+    --bg: #0f172a;
+    --bg-card: rgba(15, 23, 42, 0.7);
+    --bg-light: #f1f5f9;
+    --text: #0f172a;
+    --text-light: #e2e8f0;
+    --accent: #6366f1;
+    --accent-soft: rgba(99, 102, 241, 0.15);
+    --border: rgba(148, 163, 184, 0.2);
+    font-size: 16px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1d1b3a 100%);
+    color: var(--text-light);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+}
+
+.app {
+    width: min(1100px, 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.hero {
+    background: rgba(15, 23, 42, 0.75);
+    border-radius: 24px;
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 60px -40px rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(20px);
+}
+
+.hero h1 {
+    margin: 0 0 0.5rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+}
+
+.hero p {
+    margin: 0 0 1.5rem;
+    color: rgba(226, 232, 240, 0.85);
+}
+
+.selector {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.selector label {
+    font-weight: 600;
+    color: rgba(226, 232, 240, 0.9);
+}
+
+#game-select {
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(15, 23, 42, 0.6);
+    color: var(--text-light);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+#game-select:focus {
+    border-color: var(--accent);
+}
+
+main {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.card {
+    background: rgba(15, 23, 42, 0.75);
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-shadow: 0 30px 60px -45px rgba(15, 23, 42, 0.8);
+}
+
+.card-header h2 {
+    margin: 0 0 0.25rem;
+    font-size: 1.75rem;
+}
+
+.card-header p {
+    margin: 0;
+    color: rgba(226, 232, 240, 0.75);
+}
+
+.hidden {
+    display: none;
+}
+
+.btn {
+    border: none;
+    border-radius: 12px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn.primary {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 20px 40px -20px rgba(99, 102, 241, 0.8);
+}
+
+.btn.secondary {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.btn.ghost {
+    background: transparent;
+    color: rgba(226, 232, 240, 0.75);
+    border: 1px solid var(--border);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 18px 30px -24px rgba(99, 102, 241, 0.6);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.wordle-controls {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.wordle-board {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(50px, 64px));
+    grid-auto-rows: minmax(50px, 64px);
+    gap: 0.5rem;
+    justify-content: start;
+}
+
+.wordle-layout {
+    display: grid;
+    grid-template-columns: auto minmax(220px, 320px);
+    gap: 1rem;
+    align-items: start;
+}
+
+.wordle-help {
+    border: 1px solid var(--border);
+    background: rgba(15, 23, 42, 0.55);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+}
+
+.wordle-help h3 {
+    margin: 0 0 0.5rem;
+}
+
+.wordle-help ol {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: rgba(226, 232, 240, 0.85);
+    line-height: 1.5;
+}
+
+.wordle-tile {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border: 1px solid rgba(148,163,184,0.35);
+    background: rgba(15, 23, 42, 0.65);
+    color: var(--text-light);
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    outline: none;
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease;
+}
+
+.wordle-tile:focus {
+    border-color: var(--accent);
+}
+
+.wordle-tile.locked {
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+/* States */
+.wordle-tile.state-absent { background: #3a3a3c; border-color: #3a3a3c; }
+.wordle-tile.state-present { background: #b59f3b; border-color: #b59f3b; }
+.wordle-tile.state-correct { background: #538d4e; border-color: #538d4e; }
+
+.message {
+    min-height: 1.25rem;
+    color: rgba(226, 232, 240, 0.85);
+    font-size: 0.95rem;
+}
+
+.suggestions ol,
+.suggestions ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: rgba(226, 232, 240, 0.85);
+}
+
+.sudoku-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 0.35rem;
+}
+
+.sudoku-grid input {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    background: rgba(15, 23, 42, 0.65);
+    color: var(--text-light);
+}
+
+.sudoku-grid input:focus {
+    border-color: var(--accent);
+    outline: none;
+}
+
+.sudoku-grid input:nth-child(3n) {
+    margin-right: 0.35rem;
+}
+
+.sudoku-grid input:nth-child(27n + 1) {
+    margin-left: 0;
+}
+
+.sudoku-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.inline-form {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.inline-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    color: rgba(226, 232, 240, 0.75);
+}
+
+.inline-form input {
+    padding: 0.5rem 0.75rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(15, 23, 42, 0.65);
+    color: var(--text-light);
+}
+
+.minesweeper-grid {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.minesweeper-cell {
+    width: 100%;
+    padding: 0.65rem 0.35rem;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    background: rgba(15, 23, 42, 0.6);
+    color: var(--text-light);
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.minesweeper-legend {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    color: rgba(226, 232, 240, 0.75);
+}
+
+footer {
+    text-align: center;
+    color: rgba(226, 232, 240, 0.6);
+    font-size: 0.9rem;
+    padding-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 2rem 1rem;
+    }
+
+    .wordle-layout {
+        grid-template-columns: 1fr;
+    }
+}

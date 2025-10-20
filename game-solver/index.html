@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Puzzle Solver Hub</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <header class="hero">
+            <h1>Puzzle Solver Hub</h1>
+            <p>Choose a game and let the assistant guide you to the solution.</p>
+            <div class="selector">
+                <label for="game-select">Choose a game</label>
+                <select id="game-select">
+                    <option value="wordle">Wordle</option>
+                    <option value="sudoku">Sudoku</option>
+                    <option value="minesweeper">Minesweeper</option>
+                </select>
+            </div>
+        </header>
+
+        <main>
+            <section id="wordle-section" class="card">
+                <div class="card-header">
+                    <h2>Wordle Solver</h2>
+                    <p>Track your guesses and get the best next suggestions.</p>
+                </div>
+                <div class="wordle-controls">
+                    <button id="reset-wordle" class="btn ghost">Reset</button>
+                    <button id="wordle-back" class="btn ghost">Go Back</button>
+                    <button id="wordle-confirm" class="btn secondary">Confirm Row</button>
+                    <button id="wordle-suggest" class="btn primary">Suggest Next Guess</button>
+                </div>
+                <div class="wordle-layout">
+                    <div id="wordle-board" class="wordle-board" aria-label="Wordle board"></div>
+                    <aside class="wordle-help" aria-label="Wordle instructions">
+                        <h3>How To Use</h3>
+                        <ol>
+                            <li>Click <em>Suggest Next Guess</em> to get a word.</li>
+                            <li>Type that word in the real Wordle game.</li>
+                            <li>Enter the same letters here (auto-fills on suggest).</li>
+                            <li>Click each tile to set colors to match Wordle.</li>
+                            <li>Click <em>Confirm Row</em> to lock the guess.</li>
+                            <li>If you made a mistake, click <em>Go Back</em> to edit the previous row.</li>
+                            <li>Click <em>Suggest Next Guess</em> for the next word.</li>
+                            <li>Repeat until solved (max 6 rows).</li>
+                        </ol>
+                    </aside>
+                </div>
+                <p id="wordle-message" class="message"></p>
+                <div class="suggestions">
+                    <h3>Top Suggestions</h3>
+                    <ol id="wordle-suggestions"></ol>
+                </div>
+            </section>
+
+            <section id="sudoku-section" class="card hidden">
+                <div class="card-header">
+                    <h2>Sudoku Solver</h2>
+                    <p>Enter the puzzle and solve it instantly.</p>
+                </div>
+                <div class="sudoku-grid" id="sudoku-grid"></div>
+                <div class="sudoku-actions">
+                    <button id="solve-sudoku" class="btn primary">Solve Sudoku</button>
+                    <button id="clear-sudoku" class="btn ghost">Clear</button>
+                    <p id="sudoku-message" class="message"></p>
+                </div>
+            </section>
+
+            <section id="minesweeper-section" class="card hidden">
+                <div class="card-header">
+                    <h2>Minesweeper Assistant</h2>
+                    <p>Describe the current board and discover the safest next moves.</p>
+                </div>
+                <form id="minesweeper-settings" class="inline-form">
+                    <label>
+                        Rows
+                        <input type="number" id="minesweeper-rows" min="2" max="12" value="6" />
+                    </label>
+                    <label>
+                        Columns
+                        <input type="number" id="minesweeper-cols" min="2" max="12" value="6" />
+                    </label>
+                    <button type="submit" class="btn secondary">Update Board</button>
+                </form>
+                <div class="minesweeper-legend">
+                    <span><strong>Numbers</strong>: revealed clues</span>
+                    <span><strong>F</strong>: flagged mine</span>
+                    <span><strong>?</strong>: hidden tile</span>
+                </div>
+                <div id="minesweeper-grid" class="minesweeper-grid"></div>
+                <div class="minesweeper-actions">
+                    <button id="analyze-minesweeper" class="btn primary">Analyze Board</button>
+                    <button id="clear-minesweeper" class="btn ghost">Reset</button>
+                    <p id="minesweeper-message" class="message"></p>
+                </div>
+                <div class="suggestions">
+                    <h3>Recommended Actions</h3>
+                    <ul id="minesweeper-suggestions"></ul>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Built with strategy &amp; logic — ready for your next puzzle streak.</p>
+        </footer>
+    </div>
+    <script src="wordle-words.js"></script>
+    <script src="script.js"></script>
+    <script src="wordle-solver.js"></script>
+    <script src="sudoku-solver.js"></script>
+    <script src="minesweeper-solver.js"></script>
+</body>
+</html>
