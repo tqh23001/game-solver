@@ -3,7 +3,7 @@
 A lightweight, static web app that helps you play and solve three popular games:
 - Wordle: 6×5 in-browser board with suggestions and clue tracking
 - Sudoku: One‑click backtracking solver
-- Minesweeper: Deterministic assistant that marks guaranteed safe/mine tiles
+- Minesweeper: An assistant that marks guaranteed safe/mine tiles
 
 Open `index.html` in any modern browser to use it offline.
 
@@ -11,7 +11,7 @@ Open `index.html` in any modern browser to use it offline.
 
 ### Wordle Solver
 - 6×5 grid UI like the real game
-- Type directly into tiles, click a tile to cycle colors: gray → yellow → green
+- Type words directly into tiles, click a tile to change colors to: gray → yellow → green
 - Confirm Row: locks the row (letters + colors) and updates solver knowledge
 - Suggest Next Guess: fills the current row with the top suggestion (no repeats unless required)
 - Go Back: unlocks the previous locked row so you can fix mistakes

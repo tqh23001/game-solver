@@ -91,6 +91,12 @@
     tile.input.dataset.state = stateName;
     tile.input.classList.remove("state-absent", "state-present", "state-correct");
     tile.input.classList.add(`state-${stateName}`);
+    // pulse feedback
+    tile.input.classList.add("pulse");
+    tile.input.addEventListener("animationend", function onA() {
+      tile.input.classList.remove("pulse");
+      tile.input.removeEventListener("animationend", onA);
+    });
   }
 
   function currentRowIndex() {
@@ -176,10 +182,30 @@
     const r = currentRowIndex();
     if (r >= 6) return;
     if (!rowFilled(r)) {
+      // invalid shake feedback
+      for (let c = 0; c < 5; c++) {
+        const t = state.wordle.tiles[r][c];
+        t.input.classList.add("shake");
+        t.input.addEventListener("animationend", function onS() {
+          t.input.classList.remove("shake");
+          t.input.removeEventListener("animationend", onS);
+        });
+      }
       setWordleMessage("Fill all 5 letters before confirming.");
       return;
     }
     lockRow(r);
+    // reveal animation stagger
+    for (let c = 0; c < 5; c++) {
+      const t = state.wordle.tiles[r][c];
+      setTimeout(() => {
+        t.input.classList.add("reveal");
+        t.input.addEventListener("animationend", function onR() {
+          t.input.classList.remove("reveal");
+          t.input.removeEventListener("animationend", onR);
+        });
+      }, c * 80);
+    }
     const guesses = collectLockedGuesses();
     const knowledge = getWordleKnowledge(guesses);
     const filtered = filterWordleCandidates(WORDLE_DICT, guesses);

@@ -14,6 +14,7 @@ const state = {
 
 document.addEventListener("DOMContentLoaded", () => {
   setupGameSelector();
+  setupThemeToggle();
 });
 
 function setupGameSelector() {
@@ -35,3 +36,20 @@ function setupGameSelector() {
   });
 }
 
+function setupThemeToggle() {
+  const btn = document.getElementById("theme-toggle");
+  if (!btn) return;
+  const root = document.documentElement;
+  const stored = localStorage.getItem("theme") || "dark";
+  if (stored === "light") root.setAttribute("data-theme", "light");
+  btn.addEventListener("click", () => {
+    const isLight = root.getAttribute("data-theme") === "light";
+    if (isLight) {
+      root.removeAttribute("data-theme");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.setAttribute("data-theme", "light");
+      localStorage.setItem("theme", "light");
+    }
+  });
+}
