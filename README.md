@@ -5,7 +5,7 @@ A lightweight, static web app that helps you play and solve three popular games:
 - Sudoku: One‑click backtracking solver
 - Minesweeper: An assistant that marks guaranteed safe/mine tiles
 
-Open `index.html` in any modern browser to use it offline.
+Open "https://tqh23001.github.io/game-solver/" on any web browser to try!
 
 ## Features
 
