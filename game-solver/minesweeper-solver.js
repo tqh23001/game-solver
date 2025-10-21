@@ -64,7 +64,8 @@
     return state.minesweeper.grid.map((row) =>
       row.map((cell) => {
         const value = cell.value.trim().toUpperCase();
-        if (value === "") return "?";
+        // Treat blank as an empty revealed tile (0)
+        if (value === "") return 0;
         if (value === "F" || value === "?") return value;
         const num = parseInt(value, 10);
         if (Number.isNaN(num) || num < 0 || num > 8) return "?";
@@ -158,4 +159,3 @@
     document.getElementById("minesweeper-suggestions").innerHTML = "";
   }
 })();
-
